@@ -1,0 +1,4 @@
+# dockerignore file
+.idea/
+.settings/
+target/

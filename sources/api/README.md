@@ -71,7 +71,7 @@ RUN ["mvn", "package", "-Dmaven.test.skip=true"]
 
 # RUN PHASE
 FROM openjdk:8-jre-alpine
-COPY --from=0 /build/my-app.jar ./my-app/
+COPY --from=0 /app/my-app.jar ./my-app/
 WORKDIR /my-app
 CMD ["java", "-jar", "my-app.jar"]
 ```
@@ -96,7 +96,7 @@ Sur la figure ci-dessus, nous n'avons plus un seul container à déployer mais *
 
 **Résumé**
 
-Le gros avantage du sidecar est qu'il est facilement réutilisable. Devoir mettre à jour l'ensemble des applications d'un SI est rapidement coûteux et difficile à tester. Appliquer ce genre de pattern permet de gagner coût de développement et en consistence.
+Le gros avantage du sidecar est qu'il est facilement réutilisable. Devoir mettre à jour l'ensemble des applications d'un SI est rapidement coûteux et difficile à tester. Appliquer ce genre de pattern permet de gagner en coût de développement et en consistence.
 
 Le défaut, car il y en a un, de ce pattern est que désormais nous devons déployer deux containers au lieu d'un seul auparavant. Nous allons voir comment faire mieux avec Istio.
 
