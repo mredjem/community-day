@@ -1,12 +1,9 @@
 sudo: false
 
 before_script:
-  - cp sources/api/README.md dist/api.md
-  - cp sources/chatbot/README.md dist/chatbot.md
-  - cp sources/kotlin/README.md dist/kotlin.md
-  - cp sources/machine-learning/README.md dist/machine-learning.md
+  - cp -R sources/ dist
 
-script: ./deploy.sh dist
+script: ./deploy.sh
 
 branches:
   only:
