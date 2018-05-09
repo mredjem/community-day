@@ -1,7 +1,7 @@
 sudo: false
 
 before_script:
-  - cp -R sources/ dist
+  - cp -a sources/. dist/
 
 script: ./deploy.sh
 
