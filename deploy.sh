@@ -8,4 +8,4 @@ git add . dist/*
 git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
 
 git remote add origin-pages https://${GITHUB_API_KEY}@github.com/mredjem/community-day.git > /dev/null 2>&1
-git push --quiet --set-upstream origin-pages gh-pages
+git subtree push --quiet --set-upstream --prefix dist origin-pages gh-pages
