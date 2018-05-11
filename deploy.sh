@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 git config --global user.name "Travis CI"
 git config --global user.email "travis@travis-ci.org"
 
