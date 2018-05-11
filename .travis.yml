@@ -9,7 +9,3 @@ script: ./deploy.sh
 branches:
   only:
     - master
-
-env:
-  global:
-    - AUTHOR_EMAIL: "medhi.redjem@gmail.com"
