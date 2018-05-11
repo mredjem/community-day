@@ -4,7 +4,8 @@ git config --global user.email "travis@travis-ci.org"
 
 git checkout -b gh-pages
 git add . dist/*
-git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
+git commit -am "Travis build: $TRAVIS_BUILD_NUMBER"
+git push origin gh-pages
 
-git remote add origin-pages https://${GITHUB_API_KEY}@github.com/mredjem/community-day.git > /dev/null 2>&1
-git push origin `git subtree split --prefix dist gh-pages`:origin-pages --force
+git checkout master
+git push origin `git subtree split --prefix dist gh-pages`:gh-pages --force
