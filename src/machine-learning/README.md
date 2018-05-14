@@ -53,8 +53,12 @@ A titre d'illustration, nous allons utiliser le dataset `load_iris` comprenant d
 
 ```python
 import numpy as np
-from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_iris
+
+# on charge le jeu de données en mémoire
+iris_dataset = load_iris()
 
 # on partage le jeu de données en 2 (75/25):
 #  - un jeu de données d'entraînement pour affiner notre algorithme
@@ -62,9 +66,9 @@ from sklearn.neighbors import KNeighborsClassifier
 #
 # X représente une matrice de caractéristiques de nos échantillons
 # y représente l'étiquette attendue parmi:
-# - 0 => setosa
-# - 1 => versicolor
-# - 2 => virginica
+#  - 0 => setosa
+#  - 1 => versicolor
+#  - 2 => virginica
 X_train, X_test, y_train, y_test = train_test_split(iris_dataset['data'], iris_dataset['target'], random_state=0)
 
 # on utilise l'algorithme des k-nearest neighbors
@@ -157,9 +161,47 @@ Quels sont les avantages de ce changement dans l'algorithme? Il est beaucoup plu
 
 ### Fonctionnement
 
+La méthode ALS pour Alternating Least Squares est une autre méthode de filtrage collaboratif développé dans le cadre du Netflix Prize. Son but était de répondre à un concours lancé par Netflix pour trouver un moyen performant et efficace de déterminer une note qu'aurait donné un utilisateur sur un film.
+
+Pour bien expliquer le fonctionnement d'ALS, résumons le problème ci-dessus sous forme de matrice:
+
+$$
+movies
+\begin{array}{c}
+    users\\
+    \begin{pmatrix}
+        3 & 4 & ? & 1 \\
+        4 & ? & 3 & 2 \\
+        ? & 5 & ? & 4 \\
+        3 & 2 & ? & 2 \\
+        5 & ? & ? & ? \\
+    \end{pmatrix}\\
+\end{array}
+$$
+
+Notre liste d'avis est une matrice à 2 dimensions avec en ligne les films et en colonne les utilisateurs. Chaque coordonnée correspond à une note donnée par un utilisateur sur un film. De nombreuses valeurs ne sont pas renseignées, notre matrice est essentiellement creuse.
+
+L'algorithme ALS va nous permettre d'estimer la note qu'un utilisateur aurait donnée à un film afin de compléter notre modèle.
+
+**Explicite vs Implicite**
+
+Ici nous avons décrit un cas qui reste commode. En effet sur le cas d'utilisation que nous analysé, le retour des utilisateurs est explicite. Dans le retail, le retour est bien plus souvent implicite (via l'achat). Le retour explicite est néanmoins un vecteur d'informations très fiable plus que ne le serait un retour implicite.
+
+Pourtant un retour implicite peut être trompeur surtout en période de fêtes. En effet sur une plate-forme e-commerce, rien ne nous permet de détecter si un article est acheté est destiné à être offert ou non. L'intention de l'acheteur est malheureusement impossible à prévoir n'est-ce pas? Amazon a trouvé une rustine pour détecter ce genre de cas en encourageant l'utilisateur à réaliser un avis explicite:
+
+![retour-implicite](images/retour_implicite.png)
+
+La coche `Ceci sera un cadeau` est une astuce d'Amazon pour éviter les avis implicites non liés à l'utilisateur courant.
+
 ### Les outils
 
+scikit-learn ne propose pas à l'heure actuelle de modèles de système de recommandation. De nombreuses implémentations de filtrage collaboratif existent en Python comme [implicit](https://github.com/benfred/implicit).
+
+Des solutions existent aussi dans le domaine du Big Data avec [Spark mllib](https://spark.apache.org/docs/2.2.0/mllib-collaborative-filtering.html) qui propose un filtrage collaboratif uniquement géré avec ALS.
+
 ### Exemple d'implémentation
+
+Le dataset utilisé dans cette partie est disponible [ici](https://grouplens.org/datasets/movielens/).
 
 ## Resources
 

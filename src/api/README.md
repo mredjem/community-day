@@ -92,7 +92,11 @@ Une meilleure solution est d'utiliser un container dit `sidecar` qui va opérer 
 
 ![sidecar](images/sidecar.png)
 
-Sur la figure ci-dessus, nous n'avons plus un seul container à déployer mais **deux**. Le premier serait un container démarrant un serveur nginx dans lequel on viendrait déclarer un `proxy path` pour router tous les appels HTTPs en `my.api.com` vers notre api locale en HTTP cette fois.
+Sur la figure ci-dessus, nous n'avons plus un seul container à déployer mais **deux**.
+
+Le premier serait un container démarrant un serveur nginx dans lequel on viendrait déclarer un `proxy path` pour router tous les appels HTTPs en `my.api.com` vers notre api locale en HTTP cette fois.
+
+Le second est notre application préalablement "dockerisée" et restée inchangée.
 
 **Résumé**
 
@@ -114,11 +118,11 @@ Envoy est un proxy haute performance codé en C++ largement utilisé par Istio. 
 
 Ainsi un sidecar Envoy sera déployé en même temps que nos services métier. Nos services ne communiquent qu'avec leur front proxy, les aspects de routage ou de sécurité sont entièrement délégués à Istio.
 
-**Mise en place d'HTTPs**
+## Mise en place
 
-Nous allons à nouveau tenter de passer des applications monolithiques en HTTPs cette fois-ci avec Istio.
+### Installation
 
-**Résumé**
+### Configuration
 
 ## Resources
 
