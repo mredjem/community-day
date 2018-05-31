@@ -1,7 +1,4 @@
-package my.app;
-
-import java.time.Instant;
-import java.time.format.DateTimeFormatter;
+package my.api;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
@@ -9,8 +6,6 @@ import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 
 public final class App {
-
-  private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
   private final Vertx vertx = Vertx.vertx();
 
@@ -43,8 +38,12 @@ public final class App {
     public void start(Future<Void> future) {
       Router router = Router.router(vertx);
 
-      router.get("/").handler(
-          ctx -> ctx.response().write(String.format("Hello! It is %s.", DATE_TIME_FORMATTER.format(Instant.now()))));
+      router.get("/").handler(ctx -> {
+        final String message = "Hello from my-api!";
+
+        ctx.response().putHeader("Content-Length", String.valueOf(message.length()));
+        ctx.response().write(message);
+      });
 
       vertx.createHttpServer().requestHandler(router::accept).listen(this.port, this.host, res -> {
         if (res.succeeded())

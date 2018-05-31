@@ -120,9 +120,134 @@ Ainsi un sidecar Envoy sera déployé en même temps que nos services métier. N
 
 ## Mise en place
 
-### Installation
+### Installation de Kubernetes
 
-### Configuration
+Sur une machine de développement, Kubernetes peut facilement être installé en utilisant les clients Docker disponibles.
+
+**Kubernetes**
+
+Sur Mac et avec `Docker For Mac`, il est nécessaire de switcher en version edge et dans les préférences d'activer Kubernetes:
+
+![kubernetes](images/kubernetes.png)
+
+Kubernetes devrait s'installer au bout de quelques minutes et lancer un cluster utilisable pour y déployer nos stacks applicatives.
+
+**Minkube**
+
+La création d'un cluster Kubernetes requiert en temps normal de créer un compte sur un provider cloud (de préférence GCP). Pour réaliser des POC et expérimenter Kubernetes, nous pouvons utiliser `minikube` pour créer un cluster local.
+
+Sur Mac, `minikube` peut s'installer avec Brew:
+
+```bash
+brew cask install minikube
+```
+
+Le démarrage se fait alors avec `minikube start` et l'arrêt avec (roulement de tambour...) `minikube stop`.
+
+```bash
+$ minikube start
+
+> Starting local Kubernetes v1.10.0 cluster...
+> Starting VM...
+> Downloading Minikube ISO
+>  150.53 MB / 150.53 MB [============================================] 100.00% 0s
+> Getting VM IP address...
+> Moving files into cluster...
+> Downloading kubeadm v1.10.0
+> Downloading kubelet v1.10.0
+> Finished Downloading kubelet v1.10.0
+> Finished Downloading kubeadm v1.10.0
+> Setting up certs...
+> Connecting to cluster...
+> Setting up kubeconfig...
+> Starting cluster components...
+> Kubectl is now configured to use the cluster.
+> Loading cached images from config file.
+```
+
+En utilisant le client Kubernetes `kubectl`, on peut visualiser l'état du cluster fraîchement démarré:
+
+```bash
+$ kubectl get nodes
+
+> NAME       STATUS    ROLES     AGE       VERSION
+> minikube   Ready     master    33s       v1.10.0
+```
+
+Le cluster créé  avec minikube ne comprend qu'un seul noeud master que l'on va exploiter pour déployer nos containers.
+
+### Installation d'Istio
+
+Dans un premier temps, il est nécessaire de télécharger la dernière version d'Istio:
+
+```bash
+curl -L https://git.io/getLatestIstio | sh -
+```
+
+Cette commande va télécharger un dossier nommé par exemple `istio-0.7.1`. Cette archive contient les binaires et fichiers de déclaration nécessaires pour manipuler Istio et le déployer au sein d'un cluster Kubernetes.
+
+Pour bénéficier du client Istio, le `.bashrc` est à mettre à jour avec la ligne suivante:
+
+```bash
+export PATH="$HOME/istio-0.7.1/bin:$PATH"
+```
+
+Istio s'installer en déployant le fichier de déclaration `istio.yaml` présent dans le dossier `install/kubernetes`:
+
+```bash
+kubectl apply -f install/kubernetes/istio.yaml
+```
+
+**Activation de l'injection automatique du proxy**
+
+La création des certificats se fait avec le script `webhook-create-signed-cert.sh`:
+
+```bash
+./install/kubernetes/webhook-create-signed-cert.sh --service istio-sidecar-injector --namespace istio-system --secret sidecar-injector-certs
+```
+
+La création du configmap pour le sidecar injector se fait de la façon suivante:
+
+```bash
+kubectl apply -f install/kubernetes/istio-sidecar-injector-configmap-release.yaml
+```
+
+On met à jour `cabundle` avec le fichier de déclaration du sidecar injector:
+
+```bash
+cat install/kubernetes/istio-sidecar-injector.yaml | ./install/kubernetes/webhook-patch-ca-bundle.sh > install/kubernetes/istio-sidecar-injector-with-ca-bundle.yaml
+```
+
+Finalement le sidecar injector peut être installé avec:
+
+```bash
+kubectl apply -f install/kubernetes/istio-sidecar-injector-with-ca-bundle.yam
+```
+
+**Valider la bonne installation**
+
+```bash
+$ kubectl get svc -n istio-system
+
+> NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                                                             AGE
+> istio-ingress            LoadBalancer   10.110.18.242    <pending>     80:31911/TCP,443:31362/TCP                                          35m
+> istio-mixer              ClusterIP      10.106.245.108   <none>        9091/TCP,15004/TCP,9093/TCP,9094/TCP,9102/TCP,9125/UDP,42422/TCP    35m
+> istio-pilot              ClusterIP      10.100.37.90     <none>        15003/TCP,15005/TCP,15007/TCP,15010/TCP,8080/TCP,9093/TCP,443/TCP   35m
+> istio-sidecar-injector   ClusterIP      10.99.172.62     <none>        443/TCP                                                             26m
+```
+
+```bash
+$ kubectl get pods -n istio-system
+
+> NAME                                      READY     STATUS    RESTARTS   AGE
+> istio-ca-75fb7dc8d5-2kvsj                 1/1       Running   0          36m
+> istio-ingress-577d7b7fc7-8w65p            1/1       Running   0          36m
+> istio-mixer-859796c6bf-5pw5m              3/3       Running   0          36m
+> istio-pilot-65648c94fb-n69t9              2/2       Running   0          36m
+> istio-sidecar-injector-844b9d4f86-hffkr   1/1       Running   0          27m
+```
+
+### L'HTTPs avec Istio
 
 ## Resources
 
