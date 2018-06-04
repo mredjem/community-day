@@ -165,19 +165,7 @@ La méthode ALS pour Alternating Least Squares est une autre méthode de filtrag
 
 Pour bien expliquer le fonctionnement d'ALS, résumons le problème ci-dessus sous forme de matrice:
 
-$$
-movies
-\begin{array}{c}
-    users\\
-    \begin{pmatrix}
-        3 & 4 & ? & 1 \\
-        4 & ? & 3 & 2 \\
-        ? & 5 & ? & 4 \\
-        3 & 2 & ? & 2 \\
-        5 & ? & ? & ? \\
-    \end{pmatrix}\\
-\end{array}
-$$
+![matrix](images/matrix.png)
 
 Notre liste d'avis est une matrice à 2 dimensions avec en ligne les films et en colonne les utilisateurs. Chaque coordonnée correspond à une note donnée par un utilisateur sur un film. De nombreuses valeurs ne sont pas renseignées, notre matrice est essentiellement creuse.
 
@@ -187,11 +175,11 @@ L'algorithme ALS va nous permettre d'estimer la note qu'un utilisateur aurait do
 
 Ici nous avons décrit un cas qui reste commode. En effet sur le cas d'utilisation que nous analysé, le retour des utilisateurs est explicite. Dans le retail, le retour est bien plus souvent implicite (via l'achat). Le retour explicite est néanmoins un vecteur d'informations très fiable plus que ne le serait un retour implicite.
 
-Pourtant un retour implicite peut être trompeur surtout en période de fêtes. En effet sur une plate-forme e-commerce, rien ne nous permet de détecter si un article est acheté est destiné à être offert ou non. L'intention de l'acheteur est malheureusement impossible à prévoir n'est-ce pas? Amazon a trouvé une rustine pour détecter ce genre de cas en encourageant l'utilisateur à réaliser un avis explicite:
+Pourtant un retour implicite peut être trompeur surtout en période de fêtes. En effet sur une plate-forme e-commerce, rien ne nous permet de détecter si un article acheté est destiné à être offert ou non. L'intention de l'acheteur est malheureusement impossible à prévoir n'est-ce pas? Eh bien Amazon a trouvé une rustine pour détecter ce genre de cas en encourageant l'utilisateur à effectuer un retour explicite:
 
 ![retour-implicite](images/retour_implicite.png)
 
-La coche `Ceci sera un cadeau` est une astuce d'Amazon pour éviter les avis implicites non liés à l'utilisateur courant.
+La coche `Ceci sera un cadeau` est une astuce d'Amazon pour éviter les retours implicites non liés à l'utilisateur courant. Amazon propose alors de fournir le papier cadeau pour emballer l'article (évidemment le but premier est de préserver le moteur de recommandation de faux positif).
 
 ### Les outils
 

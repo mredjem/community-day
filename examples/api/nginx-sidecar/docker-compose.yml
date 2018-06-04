@@ -1,21 +1,20 @@
 version: '2'
 services:
-  sidecar:
-    image: mredjem/sidecar:latest
-    container_name: sidecar
-    build:
-      context: ./nginx
+  my-sidecar:
+    image: mredjem/my-sidecar:0.0.1
+    container_name: my-sidecar
+    build: ./my-sidecar
     ports:
-      - "80:80"
-    environment:
-      - NGINX_PORT=80
-    command: [nginx-debug, '-g', 'daemon off;']
+      - "443:443"
+    depends_on:
+      - my-api
 
   my-api:
-    image: mredjem/my-app:latest
+    image: mredjem/my-api:0.0.1
     container_name: my-api
-    build:
-      context: ./my-app
+    build: ./my-api
+    ports:
+      - "8080:8080"
     environment:
       - BIND_HOST=0.0.0.0
       - BIND_PORT=8080

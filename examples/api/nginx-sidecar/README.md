@@ -14,7 +14,13 @@ docker-compose up
 ## Tester
 
 ```sh
-curl https://localhost:80
+$ curl -i -k -X GET https://127.0.0.1:443
 
-> Hello, it is 2018-05-01 12:00:00.
+> HTTP/1.1 200 OK
+> Server: nginx/1.13.12
+> Date: Sun, 27 May 2018 19:29:46 GMT
+> Content-Length: 18
+> Connection: keep-alive
+>
+> Hello from my-api!
 ```
