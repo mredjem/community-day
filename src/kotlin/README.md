@@ -65,7 +65,7 @@ Cette ligne de code génère une class avec :
 Ceci à un avantage : lors de l'ajout d'une propriété pas besoin de pensée à ajouter/modifier les méthodes la concernant.
 
 
-## L'opérateur Elvis
+### L'opérateur Elvis
 
 Cette opérateur permet de plus avoir du code qui devient non lisible à cause des tests sur la valeur null.
 
@@ -95,7 +95,7 @@ Celui ci permet de retiré les opérateur !!, kotlin comprends que la variable s
 /!\ Faire attention et être sûr que sa variable sera initialisé sinon on aura la fameuse NPE.
 
 
-## Le templating de chaîne de caractère
+### Le templating de chaîne de caractère
 
 Kotlin a mit en place du templating de string pour simplifier la vie du codeur.
 
@@ -116,11 +116,11 @@ print("Qui êtes vous? ${dev.whoIam()}")
 
 ```
 
-## Le mot clé open
+### Le mot clé open
 
 Par défaut Kotlin ajout le mot clé final à chaque valeur si open n'est pas spécifié.
 
-## l'héritage en diamand est possible
+### l'héritage en diamand est possible
 
 Il y quelque règle tout de même à respecter , lors de l'implémentation il faut spécifier à kotlin laquelle on utilise.
 
@@ -146,7 +146,7 @@ class toi : t,oi {
 
 ```
 
-## Les extensions
+### Les extensions
 
 Souvent il est utile au developpeur de pouvoir rajouter une petite fonction à une class existante.
 En JAVA la méthode est de faire une fonction static qui prends le fameu objet puis applique la modification si il y en a besoin.
@@ -163,3 +163,30 @@ var l :MutableList<Int> = mutableListOf(1,2,3)
 
 l.swap(1,2)
 ```
+
+### Le mot clé object
+
+Ce mot clé nous permet de créer des singleton dans Kotlin.
+
+```
+
+object State{
+  var value : String = "init"
+}
+
+fun launch(){
+ State.value = "launch"
+ //...
+}
+
+```
+
+### Les coroutines
+
+Pour parler de cette fonctionnalité je vais partager un [article](https://blog.link-value.fr/les-coroutines-dans-kotlin-concepts-et-manipulation-2869e6415e6d) super bien écrit.
+
+
+## Astuces
+
+Pour une meilleure compréhension de Kotlin une astuce simple à réaliser et de transdormer le code kotline en byte code pour ensuite le transformer en Java pour analyser.
+Et pour ça un bon petit [article](https://medium.com/@mydogtom/tip-how-to-show-java-equivalent-for-kotlin-code-f7c81d76fa8)
