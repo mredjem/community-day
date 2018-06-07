@@ -187,10 +187,6 @@ scikit-learn ne propose pas à l'heure actuelle de modèles de système de recom
 
 Des solutions existent aussi dans le domaine du Big Data avec [Spark mllib](https://spark.apache.org/docs/2.2.0/mllib-collaborative-filtering.html) qui propose un filtrage collaboratif uniquement géré avec ALS.
 
-### Exemple d'implémentation
-
-Le dataset utilisé dans cette partie est disponible [ici](https://grouplens.org/datasets/movielens/).
-
 ## Resources
 
  - [Understanding Recommendation Engines in AI](https://medium.com/@humansforai/recommendation-engines-e431b6b6b446)
