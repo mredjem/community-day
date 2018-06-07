@@ -45,6 +45,13 @@ public final class App {
         ctx.response().write(message);
       });
 
+      router.get("/health").handler(ctx -> {
+        final String message = "Healthy? You bet I am!";
+
+        ctx.response().putHeader("Content-Length", String.valueOf(message.length()));
+        ctx.response().write(message);
+      });
+
       vertx.createHttpServer().requestHandler(router::accept).listen(this.port, this.host, res -> {
         if (res.succeeded())
           future.complete();
