@@ -102,7 +102,7 @@ Le second est notre application préalablement "dockerisée" et restée inchang�
 
 Le gros avantage du sidecar est qu'il est facilement réutilisable. Devoir mettre à jour l'ensemble des applications d'un SI est rapidement coûteux et difficile à tester. Appliquer ce genre de pattern permet de gagner en coût de développement et en consistence.
 
-Le défaut, car il y en a un, de ce pattern est que désormais nous devons déployer deux containers au lieu d'un seul auparavant. Nous allons voir comment faire mieux avec Istio.
+Le défaut, car il y en a un, de ce pattern est que désormais nous devons déployer deux containers au lieu d'un seul auparavant.
 
 ### Les service mesh avec Istio
 
@@ -132,7 +132,7 @@ Sur Mac et avec `Docker For Mac`, il est nécessaire de switcher en version edge
 
 Kubernetes devrait s'installer au bout de quelques minutes et lancer un cluster utilisable pour y déployer nos stacks applicatives.
 
-**Minkube**
+**Minikube**
 
 La création d'un cluster Kubernetes requiert en temps normal de créer un compte sur un provider cloud (de préférence GCP). Pour réaliser des POC et expérimenter Kubernetes, nous pouvons utiliser `minikube` pour créer un cluster local.
 
@@ -247,7 +247,7 @@ $ kubectl get pods -n istio-system
 > istio-sidecar-injector-844b9d4f86-hffkr   1/1       Running   0          27m
 ```
 
-### L'HTTPs avec Istio
+### Services offerts
 
 ## Resources
 
