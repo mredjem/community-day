@@ -249,6 +249,26 @@ $ kubectl get pods -n istio-system
 
 ### Services offerts
 
+Après ces étapes laborieuses pour mettre en place un cluster Kubernetes avec Istio déployé, nous avons accès à un ensemble de fonctionnalités nous permettant de simplifier la création d'architectures orientées micro-services :).
+
+**Le monitoring**
+
+Le fait d'avoir un proxy présent sur chacun de nos services permet à Istio de rapidement créer des dashboards de monitoring pour surveiller l'état de santé de nos micro-services. Un exemple de dashboard Grafana est présent sur le site d'Istio [ici](https://istio.io/blog/2017/img/istio_grafana_dashboard-new.png).
+
+**La sécurité avec HTTPs**
+
+Istio va également permettre de créer des connections sécurisées et authentifiées entre les différents services en utilisant du TLS. Des ACL (Access Control List) sont également présentes pour un filtrage plus fin des appels authorisés de service à service.
+
+**La résilience**
+
+Istio permet de définir des politiques pour garantier la résilience de l'architecture toute entière. A l'instar d'une API Gateway, des implémentations de type Circuit Breaker ou Rate Limiter vont pouvoir être mises en place de façon transparente et généralisée sur l'ensemble des micro-services.
+
+## Conclusion
+
+En résumé la combinaison Docker-Kubernetes-Istio va permettre d'automatiser toutes les tâches fastidieuses inhérentes au protocol HTTP et à la multiplication des communications réseau.
+
+Finalement Istio reprend toutes les bonnes idées de l'API management en terme de sécurité, de centralisation des métriques et de découverte de services et les combine avec la puissance de Kubernetes.
+
 ## Resources
 
  - [Designing Distributed Systems](http://shop.oreilly.com/product/0636920072768.do)
