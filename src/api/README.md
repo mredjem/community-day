@@ -26,7 +26,7 @@ Enfin la possibilité d'essayer de nouvelles technologies sur un grosse applicat
 
 ## Les microservices à la rescousse
 
-Une architecture orientée micro-services vise à scinder les monolithes en briques applicatives plus petites. Ces applications peuvent alors être gérées par une seule équipe qui a la responsabilité technique et fonctionnelle totale sur celles-ci.
+Une architecture orientée micro-services vise à scinder les monolithes en briques applicatives plus petites. Ces applications peuvent alors être gérées par une seule équipe qui en a la totale responsabilité technique et fonctionnelle.
 
 Dans une architecture microservices, on pourrait arriver à ça:
 
@@ -36,11 +36,11 @@ En adoptant ce découpage technique et fonctionnel, on peut en tirer plusieurs a
 
 **Dimensionnement**
 
-Le dimensionnement des applications peut se faire plus facilement et plus efficacement. Seuls les services pouvant se comporter comme goulot d'étranglements pourront être sizés.
+Le dimensionnement des applications peut se faire plus facilement et plus efficacement. Seuls les services susceptibles de constituer des goulots d'étranglement auront à être dimensionnés.
 
 **Meilleure organisation**
 
-Les équipes sont clairement définies et connaissent le scope sur lequel elles doivent intervenir. Elles maîtrisent l'impact de leurs développement et sont libres d'intervenir sans avoir besoin de se synchroniser avec d'autres équipes.
+Les équipes sont clairement définies et connaissent le scope sur lequel elles doivent intervenir. Elles maîtrisent l'impact de leurs développements et sont libres d'intervenir sans avoir besoin de se synchroniser avec d'autres équipes.
 
 **Abstraction de la complexité**
 
@@ -110,11 +110,11 @@ Istio est une surcouche au dessus de Kubernetes permettant, dans un premier temp
 
 De plus Istio va proposer un ensemble de fonctionnalités très utiles pour simplifier l'usage de microservices en ce qui concerne le routage, la sécurité ou encore le suivi.
 
-Comment Istio est capable d'ajouter toutes ces fonctionnalités à nos applications? C'est très simple, en utilisant à outrage le pattern sidecar!
+Comment Istio est capable d'ajouter toutes ces fonctionnalités à nos applications? C'est très simple, en utilisant le pattern sidecar à outrance!
 
 ![istio](images/istio.png)
 
-Envoy est un proxy haute performance codé en C++ largement utilisé par Istio. Son but est de réguler le trafic entrant et sortant de tous les service faisant partie du service mesh (ou _réseau de services_ pour les chauvins ;) ).
+Envoy est un proxy haute performance codé en C++ largement utilisé par Istio. Son but est de réguler le trafic entrant et sortant de tous les services faisant partie du service mesh (ou _réseau de services_ pour les chauvins ;) ).
 
 Ainsi un sidecar Envoy sera déployé en même temps que nos services métier. Nos services ne communiquent qu'avec leur front proxy, les aspects de routage ou de sécurité sont entièrement délégués à Istio.
 
