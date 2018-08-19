@@ -6,7 +6,7 @@ Ce post a pour but de présenter une nouvelle façon de désigner les interfaces
 
 Au fil du temps les interfaces utilisateurs ont évolué pour fournir toujours plus d'interaction et d'originalité. Depuis les pages web classiques, l'expérience utilisateur a évolué pour s'adapter aux nouveaux médiums comme le smartphone.
 
-Les possibilités web étant de plus en plus limités sur le mobile, les applications natives ont vu le jour avec toujours plus de fonctionnalités. Pourtant ce marché a rapidement été saturé et aujourd'hui se distinguer sur l'AppStore ou sur le PlayStore est de plus en plus compliqué.
+Les possibilités web étant de plus en plus limitées sur le mobile, les applications natives ont vu le jour avec toujours plus de fonctionnalités. Pourtant ce marché a rapidement été saturé et aujourd'hui se distinguer sur l'AppStore ou sur le PlayStore est de plus en plus compliqué.
 
 Pourtant certains applications résistent mieux que les autres, ce sont les applications de messagerie comme Gmail, Slack, Skype, Facebook et autres. Elles ouvrent le champ à de nouvelles interfaces orientées vers le chat.
 
@@ -14,7 +14,7 @@ Pourtant certains applications résistent mieux que les autres, ce sont les appl
 
 ## La théorie derrière le chatbot
 
-Bien qu'un chatbot puisse être implémentée de façon très laborieuse à coups de regex, il est en général indissociable du NLP.
+Bien qu'un chatbot puisse être implémenté de façon très laborieuse à coups de regex, il est en général indissociable du NLP.
 
 Le NLP ou Natural Language Processing est un ensemble de techniques permettant d'analyser et d'extraire de l'information d'un langage structuré.
 
@@ -122,7 +122,7 @@ Tous les mots ne sont pas nécessairement utiles pour qualifier notre contenu. L
 
 **Stemming**
 
-L'étape de stemmatisation va permettre d'appliquer une racinisation sur les tokens récupérés précedemment. Les formes plurielles ou issues d'une conjugaison spécifiques à la langue vont être supprimées pour ne garder que la racine du mot.
+L'étape de stemmatisation va permettre d'appliquer une racinisation sur les tokens récupérés précedemment. Les formes plurielles ou issues d'une conjugaison spécifique à la langue vont être supprimées pour ne garder que la racine du mot.
 
 En appliquant ce filtre le mot `employé` pourra être mis en corrélation avec le mot `employer`.
 
@@ -172,7 +172,7 @@ Chaque compétence (`Skill`) est constituée de 4 parties :
  - `Requirements`: les informations devant être récoltées et les questions à poser
  - `Actions`: les actions à prendre dès lors que les prérequis sont remplis
 
-Par exemple, voici les actions que mon bot exécute lorsque que l'utilisateur lui demande de raconter une blague :
+Par exemple, voici les actions que mon bot exécute lorsque qu'un utilisateur lui demande de raconter une blague :
 
 ![chat](images/chat.png)
 

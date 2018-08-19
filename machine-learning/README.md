@@ -108,11 +108,11 @@ Ainsi si une personne a acheté le dernier livre de J.K. Rowling le système va 
 
 **Limites**
 
-Par contre, elle rencontre rapidement des limites comme le fait que pour certains type d'achat proposer au client un produit similaire est totalement inutile. Imaginons que notre client achète une nouvelle machine à laver dans son enseigne préférée, lui en proposer une seconde alors qu'il vient d'en faire l'acquisition serait peu pertinent.
+Par contre, elle rencontre rapidement des limites comme le fait que pour certains types d'achat proposer au client un produit similaire est totalement inutile. Imaginons que notre client achète une nouvelle machine à laver dans son enseigne préférée, lui en proposer une seconde alors qu'il vient d'en faire l'acquisition serait peu pertinent.
 
-De plus cet algorithme souffre d'un manque de diversité. Il ne permet de faire découvrir de nouveaux produits aux clients.
+De plus cet algorithme souffre d'un manque de diversité. Il ne permet tout simplement pas de faire découvrir de nouveaux produits aux clients.
 
-Enfin il nécessite un énorme travail en amont pour garder à jour notre référentiel de contenu et s'assurer que les données soient toujours de qualité. Et que fait-on si le contenu n'existe tout simplement pas? Ne doit-on faire aucune recommandation aux client?
+Enfin il nécessite un énorme travail en amont pour garder à jour notre référentiel de contenu et s'assurer que les données soient toujours de qualité. Et que fait-on si le contenu n'existe tout simplement pas? Ne doit-on faire aucune recommandation à l'utilisateur?
 
 ### Filtrage collaboratif
 
@@ -139,7 +139,7 @@ A partir de cette matrice, on va pouvoir réaliser une mesure de similarité pou
 
 ![similarite](images/similarite.png)
 
-Ici, si on considère que Jane, Alice et John ont réalisé des achats similaires à ceux de Bob alors on va pouvoir regarder les achats que Bob n'a pas encore réalisé et qui ont été le plus souvent été achetés par les utilisateurs similaires à Bob. En appliquant une mesure de similarité, on peut recommander à Bob les articles ayant le rang le plus elevé.
+Ici, si on considère que Jane, Alice et John ont réalisé des achats similaires à ceux de Bob alors on va pouvoir repérer les achats que Bob n'a pas encore réalisé mais qui reviennent le plus souvent chez les utilisateurs similaires à Bob. En appliquant une mesure de similarité, on peut recommander à Bob les articles ayant le rang le plus elevé.
 
 **Limites**
 
@@ -149,19 +149,19 @@ De plus, il est inopérant pour les nouveaux clients. En effet le filtrage colla
 
 #### Collaboratif objet
 
-Nous avons vu que le fitrage collaboratif basé sur contenu devenait rapidement coûteux lorsque le nombre de clients était trop important. De plus elle se base sur des associations clients dont les centres d'intérêt peuvent changer dans le temps.
+Nous avons vu que le fitrage collaboratif basé sur contenu devenait rapidement coûteux lorsque le nombre de clients était trop important. De plus il se base sur des associations clients dont les centres d'intérêt peuvent évoluer au cours du temps.
 
-Le filtrage collaboratif objet reprend les mêmes principes sauf qu'elle ne se base plus sur des similarités d'achats entre les clients mais sur des associations entre produits. Ainsi si un masque de plongée est souvent associé à l'achat d'un tuba alors cet article sera recommandé au client qui achètera un masque de plongée.
+Le filtrage collaboratif objet reprend les mêmes principes sauf qu'il ne se base plus sur des similarités d'achats entre les clients mais sur des associations entre produits. Ainsi si un masque de plongée est souvent associé à l'achat d'un tuba alors cet article sera recommandé au client qui achètera un masque de plongée.
 
 **Avantages objet vs utilisateur**
 
-Quels sont les avantages de ce changement dans l'algorithme? Il est beaucoup plus intéressant pour les enseignes possédant un grand nombre d'utilisateurs. Les associations à calculer sont beaucoup moins importantes. De plus ces associations peuvent être pré-calculées offline et de façon moins fréquente. En effet des associations en produits vont être naturellement moins changeantes que des changements dans le comportement d'achat d'un client. Un client peut très bien être intéressé par la plongée un jour et du tennis de table dans 6 mois.
+Quels sont les avantages de ce changement dans l'algorithme? Eh bien il est beaucoup plus intéressant pour les enseignes possédant un grand nombre d'utilisateurs car les associations à calculer sont beaucoup moins importantes. De plus ces associations peuvent être pré-calculées offline et de façon moins fréquente. En effet des associations de produits seront moins susceptibles de varier au fil du temps que le comportement d'achat d'un client. Un client peut très bien être intéressé par la plongée un jour et par le tennis de table dans 6 mois.
 
 ## Alternating-Least-Squares
 
 ### Fonctionnement
 
-La méthode ALS pour Alternating Least Squares est une autre méthode de filtrage collaboratif développé dans le cadre du Netflix Prize. Son but était de répondre à un concours lancé par Netflix pour trouver un moyen performant et efficace de déterminer une note qu'aurait donné un utilisateur sur un film.
+La méthode ALS pour Alternating Least Squares est une autre méthode de filtrage collaboratif développée dans le cadre du Netflix Prize. Son but était de répondre à un concours lancé par Netflix pour trouver un moyen performant et efficace de déterminer une note qu'aurait donné un utilisateur sur un film.
 
 Pour bien expliquer le fonctionnement d'ALS, résumons le problème ci-dessus sous forme de matrice:
 
@@ -173,9 +173,9 @@ L'algorithme ALS va nous permettre d'estimer la note qu'un utilisateur aurait do
 
 **Explicite vs Implicite**
 
-Ici nous avons décrit un cas qui reste commode. En effet sur le cas d'utilisation que nous analysé, le retour des utilisateurs est explicite. Dans le retail, le retour est bien plus souvent implicite (via l'achat). Le retour explicite est néanmoins un vecteur d'informations très fiable plus que ne le serait un retour implicite.
+Ici nous avons décrit un cas qui reste commode. En effet sur le cas d'utilisation qui a été décrit, le retour des utilisateurs est explicite. Dans le retail, le retour est bien plus souvent implicite (via l'achat). Le retour explicite reste cependant le vecteur d'informations le plus fiable.
 
-Pourtant un retour implicite peut être trompeur surtout en période de fêtes. En effet sur une plate-forme e-commerce, rien ne nous permet de détecter si un article acheté est destiné à être offert ou non. L'intention de l'acheteur est malheureusement impossible à prévoir n'est-ce pas? Eh bien Amazon a trouvé une rustine pour détecter ce genre de cas en encourageant l'utilisateur à effectuer un retour explicite:
+De plus un retour implicite peut être trompeur surtout en période de fêtes. En effet sur une plate-forme e-commerce, rien ne nous permet de détecter si un article acheté est destiné à être offert ou non. L'intention de l'acheteur est malheureusement impossible à prévoir n'est-ce pas? Eh bien Amazon a trouvé une rustine pour détecter ce genre de cas en encourageant l'utilisateur à effectuer un retour explicite:
 
 ![retour-implicite](images/retour_implicite.png)
 
